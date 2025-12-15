@@ -1,8 +1,15 @@
 import { useState, useCallback } from 'react';
-import { ScholarshipData, defaultScholarshipData } from '@/types/scholarship';
+import { ScholarshipData, ScholarshipJson, defaultScholarshipData } from '@/types/scholarship';
 
 export function useScholarshipForm(initialData: ScholarshipData = defaultScholarshipData) {
   const [data, setData] = useState<ScholarshipData>(initialData);
+
+  const updateJson = useCallback((field: keyof ScholarshipJson, value: string | boolean) => {
+    setData(prev => ({
+      ...prev,
+      json: { ...prev.json, [field]: value }
+    }));
+  }, []);
 
   const updateSeo = useCallback((field: keyof ScholarshipData['seo'], value: string) => {
     setData(prev => ({
@@ -123,6 +130,7 @@ export function useScholarshipForm(initialData: ScholarshipData = defaultScholar
   return {
     data,
     setData,
+    updateJson,
     updateSeo,
     updateHero,
     updateQuickInfo,

@@ -3,7 +3,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { ScholarshipData } from '@/types/scholarship';
+import { Switch } from '@/components/ui/switch';
+import { ScholarshipData, ScholarshipJson } from '@/types/scholarship';
 import {
   Collapsible,
   CollapsibleContent,
@@ -28,11 +29,13 @@ import {
   ChevronDown,
   Plus,
   Trash2,
+  Database,
 } from 'lucide-react';
 import { useState } from 'react';
 
 interface ScholarshipFormProps {
   data: ScholarshipData;
+  updateJson: (field: keyof ScholarshipJson, value: string | boolean) => void;
   updateSeo: (field: keyof ScholarshipData['seo'], value: string) => void;
   updateHero: (field: keyof ScholarshipData['hero'], value: string) => void;
   updateQuickInfo: (field: keyof ScholarshipData['quickInfo'], value: string) => void;
@@ -88,6 +91,7 @@ function FormField({ label, children }: { label: string; children: React.ReactNo
 
 export function ScholarshipForm({
   data,
+  updateJson,
   updateSeo,
   updateHero,
   updateQuickInfo,
@@ -122,6 +126,114 @@ export function ScholarshipForm({
   return (
     <ScrollArea className="h-full scrollbar-thin">
       <div className="space-y-4 p-6">
+        {/* JSON Metadata */}
+        <FormSection title="Dados JSON (Listagem)" icon={<Database className="w-5 h-5 text-primary" />} defaultOpen={true}>
+          <div className="grid grid-cols-2 gap-3">
+            <FormField label="ID (slug)">
+              <Input
+                value={data.json.id}
+                onChange={(e) => {
+                  const value = e.target.value.toLowerCase().replace(/\s+/g, '-');
+                  updateJson('id', value);
+                  updateJson('slug', value);
+                }}
+                placeholder="chevening"
+              />
+            </FormField>
+            <FormField label="Código do País">
+              <Input
+                value={data.json.country_code}
+                onChange={(e) => updateJson('country_code', e.target.value.toLowerCase())}
+                placeholder="gb"
+                maxLength={2}
+              />
+            </FormField>
+          </div>
+          <FormField label="Título (PT)">
+            <Input
+              value={data.json.title}
+              onChange={(e) => updateJson('title', e.target.value)}
+              placeholder="Bolsa Chevening"
+            />
+          </FormField>
+          <FormField label="Título (EN)">
+            <Input
+              value={data.json.title_en}
+              onChange={(e) => updateJson('title_en', e.target.value)}
+              placeholder="Chevening Scholarship"
+            />
+          </FormField>
+          <FormField label="Descrição (PT)">
+            <Textarea
+              value={data.json.description}
+              onChange={(e) => updateJson('description', e.target.value)}
+              placeholder="Programa de bolsas do governo britânico..."
+              rows={2}
+            />
+          </FormField>
+          <FormField label="Descrição (EN)">
+            <Textarea
+              value={data.json.description_en}
+              onChange={(e) => updateJson('description_en', e.target.value)}
+              placeholder="UK government scholarship program..."
+              rows={2}
+            />
+          </FormField>
+          <div className="grid grid-cols-2 gap-3">
+            <FormField label="País">
+              <Input
+                value={data.json.country}
+                onChange={(e) => updateJson('country', e.target.value)}
+                placeholder="Reino Unido"
+              />
+            </FormField>
+            <FormField label="Nível (PT)">
+              <Input
+                value={data.json.level}
+                onChange={(e) => updateJson('level', e.target.value)}
+                placeholder="Mestrado"
+              />
+            </FormField>
+            <FormField label="Nível (EN)">
+              <Input
+                value={data.json.level_en}
+                onChange={(e) => updateJson('level_en', e.target.value)}
+                placeholder="Master's"
+              />
+            </FormField>
+            <FormField label="Prazo">
+              <Input
+                value={data.json.deadline}
+                onChange={(e) => updateJson('deadline', e.target.value)}
+                placeholder="5 Novembro 2025"
+              />
+            </FormField>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <FormField label="Financiamento">
+              <Input
+                value={data.json.funding}
+                onChange={(e) => updateJson('funding', e.target.value)}
+                placeholder="Bolsa Completa"
+              />
+            </FormField>
+            <FormField label="URL da Imagem">
+              <Input
+                value={data.json.image_url}
+                onChange={(e) => updateJson('image_url', e.target.value)}
+                placeholder="/images/og-chevening.jpg"
+              />
+            </FormField>
+          </div>
+          <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+            <Label className="text-sm text-foreground">Destaque (Featured)</Label>
+            <Switch
+              checked={data.json.featured}
+              onCheckedChange={(checked) => updateJson('featured', checked)}
+            />
+          </div>
+        </FormSection>
+
         {/* SEO & OG Tags */}
         <FormSection title="SEO & Open Graph" icon={<Globe className="w-5 h-5 text-primary" />} defaultOpen={true}>
           <FormField label="Título da Página">
