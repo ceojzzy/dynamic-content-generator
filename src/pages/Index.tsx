@@ -11,6 +11,7 @@ import {
   Code,
   RotateCcw,
   GraduationCap,
+  FileJson,
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -24,7 +25,7 @@ const Index = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${scholarshipForm.data.seo.title.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}.html`;
+    a.download = `${scholarshipForm.data.json.slug || 'bolsa'}.html`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -41,6 +42,15 @@ const Index = () => {
     toast({
       title: 'Copiado!',
       description: 'O código HTML foi copiado para a área de transferência.',
+    });
+  };
+
+  const handleCopyJson = async () => {
+    const json = JSON.stringify(scholarshipForm.data.json, null, 2);
+    await navigator.clipboard.writeText(json);
+    toast({
+      title: 'JSON Copiado!',
+      description: 'O objeto JSON foi copiado para a área de transferência.',
     });
   };
 
@@ -76,6 +86,14 @@ const Index = () => {
             >
               <RotateCcw className="w-4 h-4 mr-2" />
               Limpar
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleCopyJson}
+            >
+              <FileJson className="w-4 h-4 mr-2" />
+              <span className="hidden sm:inline">Copiar</span> JSON
             </Button>
             <Button
               variant="outline"

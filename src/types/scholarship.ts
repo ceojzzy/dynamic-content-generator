@@ -1,4 +1,26 @@
+// JSON structure for scholarship listing/cards
+export interface ScholarshipJson {
+  id: string;
+  slug: string;
+  title: string;
+  title_en: string;
+  description: string;
+  description_en: string;
+  country: string;
+  country_code: string;
+  level: string;
+  level_en: string;
+  deadline: string;
+  funding: string;
+  image_url: string;
+  featured: boolean;
+  created_at: string;
+}
+
 export interface ScholarshipData {
+  // JSON metadata (for listing)
+  json: ScholarshipJson;
+  
   // SEO & OG Tags
   seo: {
     title: string;
@@ -100,6 +122,23 @@ export interface ScholarshipData {
 }
 
 export const defaultScholarshipData: ScholarshipData = {
+  json: {
+    id: '',
+    slug: '',
+    title: '',
+    title_en: '',
+    description: '',
+    description_en: '',
+    country: '',
+    country_code: '',
+    level: 'Mestrado',
+    level_en: "Master's",
+    deadline: '',
+    funding: 'Bolsa Completa',
+    image_url: '/images/og-exemplo.jpg',
+    featured: false,
+    created_at: new Date().toISOString().split('T')[0],
+  },
   seo: {
     title: "Bolsa de Estudo 2025/2026 - Mestrado | AngoScholar",
     description: "Candidata-te a esta bolsa para fazer o teu mestrado totalmente financiado.",
