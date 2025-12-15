@@ -67,13 +67,13 @@ function FormSection({ title, icon, children, defaultOpen = false }: FormSection
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen} className="form-section">
       <CollapsibleTrigger className="w-full">
-        <div className="form-section-title cursor-pointer hover:text-primary transition-colors">
+        <div className="form-section-title cursor-pointer hover:text-primary transition-colors text-sm md:text-base">
           {icon}
-          <span className="flex-1 text-left">{title}</span>
-          <ChevronDown className={`w-5 h-5 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+          <span className="flex-1 text-left truncate">{title}</span>
+          <ChevronDown className={`w-4 h-4 md:w-5 md:h-5 transition-transform shrink-0 ${isOpen ? 'rotate-180' : ''}`} />
         </div>
       </CollapsibleTrigger>
-      <CollapsibleContent className="space-y-4 pt-2">
+      <CollapsibleContent className="space-y-3 md:space-y-4 pt-2">
         {children}
       </CollapsibleContent>
     </Collapsible>
@@ -82,8 +82,8 @@ function FormSection({ title, icon, children, defaultOpen = false }: FormSection
 
 function FormField({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="space-y-1.5">
-      <Label className="text-sm text-muted-foreground">{label}</Label>
+    <div className="space-y-1">
+      <Label className="text-xs md:text-sm text-muted-foreground">{label}</Label>
       {children}
     </div>
   );
@@ -125,10 +125,10 @@ export function ScholarshipForm({
 
   return (
     <ScrollArea className="h-full scrollbar-thin">
-      <div className="space-y-4 p-6">
+      <div className="space-y-3 md:space-y-4 p-4 md:p-6">
         {/* JSON Metadata */}
         <FormSection title="Dados JSON (Listagem)" icon={<Database className="w-5 h-5 text-primary" />} defaultOpen={true}>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <FormField label="ID (slug)">
               <Input
                 value={data.json.id}
@@ -179,7 +179,7 @@ export function ScholarshipForm({
               rows={2}
             />
           </FormField>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <FormField label="País">
               <Input
                 value={data.json.country}
@@ -209,7 +209,7 @@ export function ScholarshipForm({
               />
             </FormField>
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <FormField label="Financiamento">
               <Input
                 value={data.json.funding}
@@ -325,7 +325,7 @@ export function ScholarshipForm({
 
         {/* Quick Info */}
         <FormSection title="Informações Rápidas" icon={<FileText className="w-5 h-5 text-primary" />}>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <FormField label="País">
               <Input
                 value={data.quickInfo.country}
