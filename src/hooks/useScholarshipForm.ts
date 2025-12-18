@@ -74,6 +74,13 @@ export function useScholarshipForm(initialData: ScholarshipData = defaultScholar
     }));
   }, []);
 
+  const updateRequiredDocuments = useCallback((documents: string[]) => {
+    setData(prev => ({
+      ...prev,
+      requiredDocuments: documents
+    }));
+  }, []);
+
   const updateTimeline = useCallback((timeline: ScholarshipData['timeline']) => {
     setData(prev => ({
       ...prev,
@@ -140,6 +147,7 @@ export function useScholarshipForm(initialData: ScholarshipData = defaultScholar
     updateCoverage,
     updateStudyAreas,
     updateEligibility,
+    updateRequiredDocuments,
     updateTimeline,
     updateApplicationProcess,
     updateTips,

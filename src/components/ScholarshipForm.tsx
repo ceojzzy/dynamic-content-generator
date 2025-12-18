@@ -45,6 +45,7 @@ interface ScholarshipFormProps {
   updateCoverage: (items: ScholarshipData['coverage']['items']) => void;
   updateStudyAreas: (areas: string[]) => void;
   updateEligibility: (criteria: string[]) => void;
+  updateRequiredDocuments: (documents: string[]) => void;
   updateTimeline: (timeline: ScholarshipData['timeline']) => void;
   updateApplicationProcess: (steps: string[]) => void;
   updateTips: (tips: string[]) => void;
@@ -101,6 +102,7 @@ export function ScholarshipForm({
   updateCoverage,
   updateStudyAreas,
   updateEligibility,
+  updateRequiredDocuments,
   updateTimeline,
   updateApplicationProcess,
   updateTips,
@@ -519,6 +521,37 @@ export function ScholarshipForm({
           >
             <Plus className="w-4 h-4 mr-2" />
             Adicionar Critério
+          </Button>
+        </FormSection>
+
+        {/* Required Documents */}
+        <FormSection title="Documentos Necessários" icon={<BookOpen className="w-5 h-5 text-primary" />}>
+          {data.requiredDocuments.map((doc, i) => (
+            <div key={i} className="flex gap-2">
+              <Input
+                value={doc}
+                onChange={(e) => updateArrayItem(data.requiredDocuments, i, e.target.value, updateRequiredDocuments)}
+                placeholder={`Documento ${i + 1}`}
+                className="flex-1"
+              />
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => removeArrayItem(data.requiredDocuments, i, updateRequiredDocuments)}
+                className="shrink-0"
+              >
+                <Trash2 className="w-4 h-4 text-destructive" />
+              </Button>
+            </div>
+          ))}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => addArrayItem(data.requiredDocuments, updateRequiredDocuments)}
+            className="w-full"
+          >
+            <Plus className="w-4 h-4 mr-2" />
+            Adicionar Documento
           </Button>
         </FormSection>
 
