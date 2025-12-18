@@ -197,6 +197,25 @@ export function HtmlPreview({ data }: HtmlPreviewProps) {
             </ul>
           </section>
 
+          {/* Required Documents */}
+          <section className="animate-fade-in">
+            <h2 className="flex items-center gap-2 text-lg font-serif font-semibold text-foreground mb-4 pb-2 border-b border-border">
+              <BookOpen className="w-5 h-5 text-primary" />
+              Documentos Necessários
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {data.requiredDocuments.map((doc, i) => (
+                <span 
+                  key={i} 
+                  className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-3 py-2 rounded-lg text-sm"
+                >
+                  <BookOpen className="w-4 h-4" />
+                  {doc}
+                </span>
+              ))}
+            </div>
+          </section>
+
           {/* Timeline */}
           <section className="animate-fade-in">
             <h2 className="flex items-center gap-2 text-lg font-serif font-semibold text-foreground mb-4 pb-2 border-b border-border">

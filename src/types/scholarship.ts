@@ -83,6 +83,9 @@ export interface ScholarshipData {
   // Eligibility Criteria
   eligibility: string[];
   
+  // Required Documents
+  requiredDocuments: string[];
+  
   // Timeline
   timeline: Array<{
     stage: string;
@@ -195,6 +198,11 @@ export const defaultScholarshipData: ScholarshipData = {
     "Critério de elegibilidade 1",
     "Critério de elegibilidade 2",
     "Critério de elegibilidade 3",
+  ],
+  requiredDocuments: [
+    "Documento necessário 1",
+    "Documento necessário 2",
+    "Documento necessário 3",
   ],
   timeline: [
     { stage: "Abertura de candidaturas", date: "Data 1" },
