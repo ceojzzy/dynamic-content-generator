@@ -46,8 +46,25 @@ const Index = () => {
   };
 
   const handleCopyJson = async () => {
-    const json = JSON.stringify(scholarshipForm.data.json, null, 2);
-    await navigator.clipboard.writeText(json);
+    const jsonData = scholarshipForm.data.json;
+    const jsonString = `{
+    id: '${jsonData.id}',
+    slug: '${jsonData.slug}',
+    title: '${jsonData.title}',
+    title_en: '${jsonData.title_en}',
+    description: '${jsonData.description}',
+    description_en: '${jsonData.description_en}',
+    country: '${jsonData.country}',
+    country_code: '${jsonData.country_code}',
+    level: '${jsonData.level}',
+    level_en: "${jsonData.level_en}",
+    deadline: '${jsonData.deadline}',
+    funding: '${jsonData.funding}',
+    image_url: '${jsonData.image_url}',
+    featured: ${jsonData.featured},
+    created_at: '${jsonData.created_at}',
+  },`;
+    await navigator.clipboard.writeText(jsonString);
     toast({
       title: 'JSON Copiado!',
       description: 'O objeto JSON foi copiado para a área de transferência.',
