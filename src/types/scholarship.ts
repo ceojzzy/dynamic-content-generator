@@ -234,7 +234,7 @@ export const defaultScholarshipData: ScholarshipData = {
     description: "Acede ao portal oficial para começar a tua candidatura.",
     applyUrl: "https://exemplo.com/apply",
     applyText: "Candidatar-se Agora",
-    whatsappUrl: "https://wa.me/244999999999",
+    whatsappUrl: "https://whatsapp.com/channel/0029VajyQUo9MF968ORN9i0i",
     whatsappText: "Participar no WhatsApp",
   },
 };
