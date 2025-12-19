@@ -4,11 +4,69 @@ import { ScholarshipData, ScholarshipJson, defaultScholarshipData } from '@/type
 export function useScholarshipForm(initialData: ScholarshipData = defaultScholarshipData) {
   const [data, setData] = useState<ScholarshipData>(initialData);
 
+  // Sync JSON fields to other related sections
   const updateJson = useCallback((field: keyof ScholarshipJson, value: string | boolean) => {
-    setData(prev => ({
-      ...prev,
-      json: { ...prev.json, [field]: value }
-    }));
+    setData(prev => {
+      const newData = {
+        ...prev,
+        json: { ...prev.json, [field]: value }
+      };
+
+      // Sync title to SEO, Hero, and OG
+      if (field === 'title' && typeof value === 'string') {
+        newData.seo = { ...newData.seo, title: value, ogTitle: value };
+        newData.hero = { ...newData.hero, title: value };
+      }
+
+      // Sync description to SEO and OG
+      if (field === 'description' && typeof value === 'string') {
+        newData.seo = { ...newData.seo, description: value, ogDescription: value };
+        newData.hero = { ...newData.hero, description: value };
+      }
+
+      // Sync slug to canonical URL and OG URL
+      if (field === 'slug' && typeof value === 'string') {
+        const canonicalUrl = `https://angoscholar.com/bolsas/${value}.html`;
+        newData.seo = { ...newData.seo, canonicalUrl, ogUrl: canonicalUrl };
+      }
+
+      // Sync country to quickInfo
+      if (field === 'country' && typeof value === 'string') {
+        newData.quickInfo = { ...newData.quickInfo, country: value };
+      }
+
+      // Sync country_code to quickInfo flag URL
+      if (field === 'country_code' && typeof value === 'string') {
+        newData.quickInfo = { ...newData.quickInfo, countryFlag: `/flags/${value}.svg` };
+      }
+
+      // Sync level to quickInfo
+      if (field === 'level' && typeof value === 'string') {
+        newData.quickInfo = { ...newData.quickInfo, level: value };
+        // Also update hero badge with country and level
+        const country = newData.json.country || 'País';
+        newData.hero = { ...newData.hero, badge: `${country} • ${value}` };
+      }
+
+      // Sync deadline to quickInfo
+      if (field === 'deadline' && typeof value === 'string') {
+        newData.quickInfo = { ...newData.quickInfo, deadline: value };
+      }
+
+      // Sync funding to quickInfo
+      if (field === 'funding' && typeof value === 'string') {
+        newData.quickInfo = { ...newData.quickInfo, funding: value };
+      }
+
+      // Sync image_url to SEO OG image and hero thumbnail
+      if (field === 'image_url' && typeof value === 'string') {
+        const fullImageUrl = value.startsWith('http') ? value : `https://angoscholar.com${value}`;
+        newData.seo = { ...newData.seo, ogImage: fullImageUrl, twitterImage: fullImageUrl };
+        newData.hero = { ...newData.hero, thumbnailUrl: value };
+      }
+
+      return newData;
+    });
   }, []);
 
   const updateSeo = useCallback((field: keyof ScholarshipData['seo'], value: string) => {
