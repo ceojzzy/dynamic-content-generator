@@ -110,7 +110,7 @@ const Index = () => {
               variant="outline"
               size="sm"
               onClick={handleCopyJson}
-              className="px-2 md:px-3"
+              className="px-2 md:px-3 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white"
             >
               <FileJson className="w-4 h-4 md:mr-2" />
               <span className="hidden md:inline">JSON</span>
