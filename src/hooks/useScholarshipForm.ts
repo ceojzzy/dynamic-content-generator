@@ -1,8 +1,38 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { ScholarshipData, ScholarshipJson, defaultScholarshipData } from '@/types/scholarship';
 
+const STORAGE_KEY = 'scholarship-form-data';
+
+function loadFromStorage(): ScholarshipData | null {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      return JSON.parse(stored);
+    }
+  } catch (e) {
+    console.error('Error loading from localStorage:', e);
+  }
+  return null;
+}
+
+function saveToStorage(data: ScholarshipData) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch (e) {
+    console.error('Error saving to localStorage:', e);
+  }
+}
+
 export function useScholarshipForm(initialData: ScholarshipData = defaultScholarshipData) {
-  const [data, setData] = useState<ScholarshipData>(initialData);
+  const [data, setData] = useState<ScholarshipData>(() => {
+    const stored = loadFromStorage();
+    return stored || initialData;
+  });
+
+  // Save to localStorage whenever data changes
+  useEffect(() => {
+    saveToStorage(data);
+  }, [data]);
 
   // Sync JSON fields to other related sections
   const updateJson = useCallback((field: keyof ScholarshipJson, value: string | boolean) => {
@@ -190,6 +220,7 @@ export function useScholarshipForm(initialData: ScholarshipData = defaultScholar
 
   const resetData = useCallback(() => {
     setData(defaultScholarshipData);
+    localStorage.removeItem(STORAGE_KEY);
   }, []);
 
   return {
