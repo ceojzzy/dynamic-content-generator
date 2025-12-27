@@ -260,6 +260,29 @@ export function ScholarshipForm({
               placeholder="bolsa, estudo, mestrado, angola"
             />
           </FormField>
+          <FormField label="Autor">
+            <Input
+              value={data.seo.author}
+              onChange={(e) => updateSeo('author', e.target.value)}
+              placeholder="AngoScholar Editorial"
+            />
+          </FormField>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <FormField label="Data de Publicação">
+              <Input
+                type="date"
+                value={data.seo.datePublished}
+                onChange={(e) => updateSeo('datePublished', e.target.value)}
+              />
+            </FormField>
+            <FormField label="Data de Modificação">
+              <Input
+                type="date"
+                value={data.seo.dateModified}
+                onChange={(e) => updateSeo('dateModified', e.target.value)}
+              />
+            </FormField>
+          </div>
           <FormField label="URL Canónica">
             <Input
               value={data.seo.canonicalUrl}
@@ -285,6 +308,48 @@ export function ScholarshipForm({
               value={data.seo.ogImage}
               onChange={(e) => updateSeo('ogImage', e.target.value)}
               placeholder="https://angoscholar.com/images/..."
+            />
+          </FormField>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <FormField label="OG Imagem Largura">
+              <Input
+                value={data.seo.ogImageWidth}
+                onChange={(e) => updateSeo('ogImageWidth', e.target.value)}
+                placeholder="1200"
+              />
+            </FormField>
+            <FormField label="OG Imagem Altura">
+              <Input
+                value={data.seo.ogImageHeight}
+                onChange={(e) => updateSeo('ogImageHeight', e.target.value)}
+                placeholder="630"
+              />
+            </FormField>
+            <FormField label="OG Locale">
+              <Input
+                value={data.seo.ogLocale}
+                onChange={(e) => updateSeo('ogLocale', e.target.value)}
+                placeholder="pt_AO"
+              />
+            </FormField>
+          </div>
+          <FormField label="Twitter Título">
+            <Input
+              value={data.seo.twitterTitle}
+              onChange={(e) => updateSeo('twitterTitle', e.target.value)}
+            />
+          </FormField>
+          <FormField label="Twitter Descrição">
+            <Textarea
+              value={data.seo.twitterDescription}
+              onChange={(e) => updateSeo('twitterDescription', e.target.value)}
+              rows={2}
+            />
+          </FormField>
+          <FormField label="Twitter Imagem URL">
+            <Input
+              value={data.seo.twitterImage}
+              onChange={(e) => updateSeo('twitterImage', e.target.value)}
             />
           </FormField>
         </FormSection>

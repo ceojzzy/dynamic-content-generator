@@ -106,35 +106,136 @@ export function generateHtml(data: ScholarshipData): string {
     .map(p => `                    <p>${p}</p>`)
     .join('\n');
 
+  // Generate FAQ Schema JSON-LD
+  const faqSchemaItems = data.faq
+    .filter(item => item.question && item.answer)
+    .map(item => `      {
+        "@type": "Question",
+        "name": "${item.question.replace(/"/g, '\\"')}",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "${item.answer.replace(/"/g, '\\"')}"
+        }
+      }`)
+    .join(',\n');
+
+  const faqSchema = data.faq.filter(item => item.question && item.answer).length > 0
+    ? `
+    <!-- Schema: FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+${faqSchemaItems}
+      ]
+    }
+    </script>`
+    : '';
+
   return `<!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-AO">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO -->
+    <!-- Básico -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Título -->
     <title>${data.seo.title}</title>
-    <meta name="description" content="${data.seo.description}">
-    <meta name="keywords" content="${data.seo.keywords}">
-    <link rel="canonical" href="${data.seo.canonicalUrl}">
-    
+
+    <!-- SEO -->
+    <meta name="description" content="${data.seo.description}" />
+    <meta name="keywords" content="${data.seo.keywords}" />
+    <meta name="author" content="${data.seo.author}" />
+    <meta name="application-name" content="AngoScholar" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="${data.seo.canonicalUrl}" />
+
     <!-- Open Graph -->
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="${data.seo.ogTitle}">
-    <meta property="og:description" content="${data.seo.ogDescription}">
-    <meta property="og:image" content="${data.seo.ogImage}">
-    <meta property="og:url" content="${data.seo.ogUrl}">
-    <meta property="og:site_name" content="AngoScholar">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="${data.seo.twitterTitle}">
-    <meta name="twitter:description" content="${data.seo.twitterDescription}">
-    <meta name="twitter:image" content="${data.seo.twitterImage}">
-    
+    <meta property="og:title" content="${data.seo.ogTitle}" />
+    <meta property="og:description" content="${data.seo.ogDescription}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="${data.seo.ogUrl}" />
+    <meta property="og:image" content="${data.seo.ogImage}" />
+    <meta property="og:image:width" content="${data.seo.ogImageWidth}" />
+    <meta property="og:image:height" content="${data.seo.ogImageHeight}" />
+    <meta property="og:site_name" content="AngoScholar" />
+    <meta property="og:locale" content="${data.seo.ogLocale}" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${data.seo.twitterTitle}" />
+    <meta name="twitter:description" content="${data.seo.twitterDescription}" />
+    <meta name="twitter:image" content="${data.seo.twitterImage}" />
+
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Schema: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Início",
+          "item": "https://angoscholar.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Bolsas de Estudo",
+          "item": "https://angoscholar.com/bolsas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "${data.json.title}",
+          "item": "${data.seo.canonicalUrl}"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Schema: BlogPosting (ESSENCIAL PARA DISCOVER) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "${data.seo.ogTitle}",
+      "description": "${data.seo.description}",
+      "image": {
+        "@type": "ImageObject",
+        "url": "${data.seo.ogImage}",
+        "width": ${data.seo.ogImageWidth},
+        "height": ${data.seo.ogImageHeight}
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "${data.seo.author}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "AngoScholar",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://angoscholar.com/images/logo.png"
+        }
+      },
+      "datePublished": "${data.seo.datePublished}",
+      "dateModified": "${data.seo.dateModified}",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "${data.seo.canonicalUrl}"
+      }
+    }
+    </script>
+${faqSchema}
     <!-- Shared Styles -->
     <link rel="stylesheet" href="/styles/main.css">
 </head>

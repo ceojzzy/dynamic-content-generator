@@ -30,10 +30,16 @@ export interface ScholarshipData {
     ogTitle: string;
     ogDescription: string;
     ogImage: string;
+    ogImageWidth: string;
+    ogImageHeight: string;
     ogUrl: string;
+    ogLocale: string;
     twitterTitle: string;
     twitterDescription: string;
     twitterImage: string;
+    author: string;
+    datePublished: string;
+    dateModified: string;
   };
   
   // Hero Section
@@ -150,10 +156,16 @@ export const defaultScholarshipData: ScholarshipData = {
     ogTitle: "Bolsa de Estudo 2025/2026 - Mestrado Totalmente Financiado",
     ogDescription: "Candidata-te a esta bolsa para fazer o teu mestrado totalmente financiado.",
     ogImage: "https://angoscholar.com/images/og-exemplo.jpg",
+    ogImageWidth: "1200",
+    ogImageHeight: "630",
     ogUrl: "https://angoscholar.com/bolsas/exemplo.html",
+    ogLocale: "pt_AO",
     twitterTitle: "Bolsa de Estudo 2025/2026 - Mestrado",
     twitterDescription: "Candidata-te a esta bolsa para fazer o teu mestrado totalmente financiado.",
     twitterImage: "https://angoscholar.com/images/og-exemplo.jpg",
+    author: "AngoScholar Editorial",
+    datePublished: new Date().toISOString().split('T')[0],
+    dateModified: new Date().toISOString().split('T')[0],
   },
   hero: {
     badge: "País • Nível",
