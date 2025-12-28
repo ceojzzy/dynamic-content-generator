@@ -223,7 +223,7 @@ export function ScholarshipForm({
               <Input
                 value={data.json.image_url}
                 onChange={(e) => updateJson('image_url', e.target.value)}
-                placeholder="/images/og-chevening.jpg"
+                placeholder="/images/og-slug.webp"
               />
             </FormField>
           </div>
@@ -242,7 +242,7 @@ export function ScholarshipForm({
             <Input
               value={data.seo.title}
               onChange={(e) => updateSeo('title', e.target.value)}
-              placeholder="Bolsa de Estudo 2025/2026 | AngoScholar"
+              placeholder="Bolsa de Estudo AngoScholar"
             />
           </FormField>
           <FormField label="Meta Descrição">
@@ -307,7 +307,7 @@ export function ScholarshipForm({
             <Input
               value={data.seo.ogImage}
               onChange={(e) => updateSeo('ogImage', e.target.value)}
-              placeholder="https://angoscholar.com/images/..."
+              placeholder="https://angoscholar.vercel.app/images/..."
             />
           </FormField>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
