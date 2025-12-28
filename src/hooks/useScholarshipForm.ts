@@ -56,7 +56,7 @@ export function useScholarshipForm(initialData: ScholarshipData = defaultScholar
 
       // Sync slug to canonical URL and OG URL
       if (field === 'slug' && typeof value === 'string') {
-        const canonicalUrl = `https://angoscholar.com/bolsas/${value}.html`;
+        const canonicalUrl = `https://angoscholar.vercel.app/bolsas/${value}.html`;
         newData.seo = { ...newData.seo, canonicalUrl, ogUrl: canonicalUrl };
       }
 
@@ -90,7 +90,7 @@ export function useScholarshipForm(initialData: ScholarshipData = defaultScholar
 
       // Sync image_url to SEO OG image and hero thumbnail
       if (field === 'image_url' && typeof value === 'string') {
-        const fullImageUrl = value.startsWith('http') ? value : `https://angoscholar.com${value}`;
+        const fullImageUrl = value.startsWith('http') ? value : `https://angoscholar.vercel.app${value}`;
         newData.seo = { ...newData.seo, ogImage: fullImageUrl, twitterImage: fullImageUrl };
         newData.hero = { ...newData.hero, thumbnailUrl: value };
       }
