@@ -184,13 +184,13 @@ ${faqSchemaItems}
           "@type": "ListItem",
           "position": 1,
           "name": "Início",
-          "item": "https://angoscholar.com/"
+          "item": "https://angoscholar.vercel.app/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Bolsas de Estudo",
-          "item": "https://angoscholar.com/bolsas"
+          "item": "https://angoscholar.vercel.app/bolsas"
         },
         {
           "@type": "ListItem",
@@ -202,7 +202,7 @@ ${faqSchemaItems}
     }
     </script>
 
-    <!-- Schema: BlogPosting (ESSENCIAL PARA DISCOVER) -->
+    <!-- Schema: BlogPosting -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -224,7 +224,7 @@ ${faqSchemaItems}
         "name": "AngoScholar",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://angoscholar.com/images/logo.png"
+          "url": "https://angoscholar.vercel.app/images/og-home.jpg"
         }
       },
       "datePublished": "${data.seo.datePublished}",
@@ -245,7 +245,7 @@ ${faqSchema}
         <div class="container">
             <div class="header-inner">
                 <a href="/" class="logo">
-                    <img src="/images/logo-angoscolar.webp" alt="AngoScholar - Bolsas de Estudo para Angolanos" class="logo-img">
+                    <img src="/images/logo-angoscolar.webp" alt="AngoScholar - Bolsas de Estudo Internacionais" class="logo-img">
                 </a>
                 
                 <nav class="nav">
@@ -588,35 +588,35 @@ ${finalConsiderationsHtml}
                                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
                                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
                             </svg>
-                            Bolsas Relacionadas
+                            Outras Oportunidades
                         </h3>
                         <div class="related-list">
-                            <a href="/bolsas/commonwealth.html" class="related-item">
-                                <img src="/images/og-commonwealth.jpg" alt="Commonwealth" class="related-thumb">
+                            <a href="/paises.html?country=br" class="related-item">
+                                <img src="/flags/br.svg" alt="Bolsas de Estudos no Brasil" class="related-thumb">
                                 <div class="related-info">
-                                    <div class="related-title">Commonwealth Scholarship</div>
-                                    <div class="related-country">Reino Unido</div>
+                                    <div class="related-title">Bolsas de Estudos no Brasil</div>
+                                    <div class="related-country">Licenciatura, Mestrado e Doutorado</div>
                                 </div>
                             </a>
-                            <a href="/bolsas/gates-cambridge.html" class="related-item">
-                                <img src="/images/og-gates.jpg" alt="Gates Cambridge" class="related-thumb">
+                            <a href="/paises.html?country=pt" class="related-item">
+                                <img src="/flags/pt.svg" alt="Bolsas de Estudos de Portugal" class="related-thumb">
                                 <div class="related-info">
-                                    <div class="related-title">Gates Cambridge</div>
-                                    <div class="related-country">Reino Unido</div>
+                                    <div class="related-title">Bolsas de Estudos de Portugal</div>
+                                    <div class="related-country">Licenciatura, Mestrado e Doutorado</div>
                                 </div>
                             </a>
-                            <a href="/bolsas/fulbright.html" class="related-item">
-                                <img src="/images/og-fulbright.jpg" alt="Fulbright" class="related-thumb">
+                            <a href="/paises.html?country=ru" class="related-item">
+                                <img src="/flags/ru.svg" alt="Bolsas de Estudos na Rússia" class="related-thumb">
                                 <div class="related-info">
-                                    <div class="related-title">Fulbright</div>
-                                    <div class="related-country">Estados Unidos</div>
+                                    <div class="related-title">Bolsas de Estudos na Rússia</div>
+                                    <div class="related-country">Licenciatura, Mestrado e Doutorado</div>
                                 </div>
                             </a>
-                            <a href="/bolsas/erasmus-mundus.html" class="related-item">
-                                <img src="/images/og-erasmus.jpg" alt="Erasmus Mundus" class="related-thumb">
+                            <a href="/paises.html?country=gb" class="related-item">
+                                <img src="/flags/gb.svg" alt="Bolsas de Estudos no Reino Unido" class="related-thumb">
                                 <div class="related-info">
-                                    <div class="related-title">Erasmus Mundus</div>
-                                    <div class="related-country">Europa</div>
+                                    <div class="related-title">Bolsas de Estudos no Reino Unido</div>
+                                    <div class="related-country">Licenciatura, Mestrado e Doutorado</div>
                                 </div>
                             </a>
                         </div>
@@ -673,10 +673,10 @@ ${finalConsiderationsHtml}
                     <div class="footer-section">
                         <h4>Bolsas</h4>
                         <ul class="footer-links">
-                            <li><a href="/bolsas/chevening.html">Chevening</a></li>
-                            <li><a href="/bolsas/commonwealth.html">Commonwealth</a></li>
-                            <li><a href="/bolsas/fulbright.html">Fulbright</a></li>
-                            <li><a href="/bolsas/erasmus-mundus.html">Erasmus Mundus</a></li>
+                            <li><a href="/bolsas.html">Licenciatura</a></li>
+                            <li><a href="/bolsas.html">Mestrado</a></li>
+                            <li><a href="/bolsas.html">Doutorado</a></li>
+                            <li><a href="/bolsas.html">Outros Programas</a></li>
                         </ul>
                     </div>
                     
@@ -685,7 +685,7 @@ ${finalConsiderationsHtml}
                         <ul class="footer-links">
                             <li><a href="/paises.html?country=gb">Reino Unido</a></li>
                             <li><a href="/paises.html?country=us">Estados Unidos</a></li>
-                            <li><a href="/paises.html?country=de">Alemanha</a></li>
+                            <li><a href="/paises.html?country=br">Brasil</a></li>
                             <li><a href="/paises.html?country=pt">Portugal</a></li>
                         </ul>
                     </div>
@@ -716,7 +716,7 @@ ${finalConsiderationsHtml}
         <div class="footer-bottom">
             <div class="container">
                 <div class="footer-bottom-inner">
-                    <p class="footer-copyright">© 2024 AngoScholar. Todos os direitos reservados.</p>
+                    <p class="footer-copyright">© 2025 AngoScholar. Todos os direitos reservados.</p>
                     <div class="footer-social">
                         <a href="https://facebook.com/angoscholar" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -746,7 +746,8 @@ ${finalConsiderationsHtml}
                 </div>
             </div>
         </div>
-    </footer>
+                                    </footer>
+
 
     <!-- Scripts -->
     <script>
